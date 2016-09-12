@@ -19,25 +19,25 @@ import (
 )
 
 type Node struct {
-	Url         string
-	Permalink   template.HTML
-	RSSlink     template.HTML
-	Site        SiteInfo
-	layout      string
+	RSSLink template.HTML
+	Site    SiteInfo
+	//	layout      string
 	Data        map[string]interface{}
-	Section     string
-	Slug        string
 	Title       string
 	Description string
 	Keywords    []string
+	Params      map[string]interface{}
 	Date        time.Time
+	UrlPath
 }
 
-func (n *Node) GetSection() string {
-	s := ""
-	if n.Section != "" {
-		s = n.Section
-	}
+func (n Node) RSSlink() template.HTML {
+	return n.RSSLink
+}
 
-	return s
+type UrlPath struct {
+	Url       string
+	Permalink template.HTML
+	Slug      string
+	Section   string
 }
